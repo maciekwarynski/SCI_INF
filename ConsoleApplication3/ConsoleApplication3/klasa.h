@@ -1,34 +1,16 @@
-class MyVector
+#pragma once
+#include <vector>
+using namespace std;
+class sortowanie
 {
 public:
-	MyVector() {
-		size = 10;
-		tablica = new int[size];
-		for (int i = 0; i < size; i++) {
-			tablica[i] = 0;
-		}
-	}
-	MyVector(unsigned int a) {
-		size = a;
-		tablica = new int[size];
-		for (int i = 0; i < size; i++) {
-			tablica[i] = 0;
-		}
-	}
-
-
-	void add(int value);
-	void remove();
-	int printAt(int index);
-	void addAt(int index, int value);
-	void printTable();
-	void removeAt(int index);
-
-	~MyVector() {
-		delete [] tablica;
-	}
-
+	void wyswietl_liczby();
+	void generowanie_liczb();
+	void babelkowe();
+	void sortowanie_wstawianie();
+	int szukanie(int value);
+	int FindValue(int lewyZakres, int prawyZakres, int szukanaWartosc, const std::vector<int>& wektorDanych);
 private:
-	int* tablica;
-	unsigned int size;
+	vector <int> liczby;
+	int x, o;
 };

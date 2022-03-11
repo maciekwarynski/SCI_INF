@@ -1,96 +1,58 @@
-#include "klasa.h"
 #include <iostream>
-
+#include <stdlib.h>
+#include <vector>
+#include "klasa.h"
 using namespace std;
-
-
-void MyVector::add(int value) {
-	int* temp1 = new int[size + 1];
-	for (int i = 0; i < size; i++)
+void sortowanie::wyswietl_liczby() {
+	for (int i = 0; i < 100; i++)
 	{
-		temp1[i] = tablica[i];
-	}
-	temp1[size] = value;
-	delete[] tablica;
-	tablica = temp1;
-	size++;
-}
-
-void MyVector::remove() {
-	int* temp2 = new int[size - 1];
-	for (int i = 0; i < size - 1; i++)
-	{
-		tablica[i] = temp2[i];
-	}
-	delete[] tablica;
-	tablica = temp2;
-	size--;
-}
-
-
-int MyVector::printAt(int index) {
-	if (index >= 0 || index < size)
-	{
-		cout << tablica[index] << endl;
-	}
-	else {
-		cout << "Nie ma takiego miejsca w wektorze" << endl;
-		return -2147483647;
+		cout << liczby[i] << "\n";
 	}
 }
 
-void MyVector::addAt(int index, int value) {
-	if (index >= 0 || index < size)
+void sortowanie::generowanie_liczb() {
+	srand(time(NULL));
+	for (int i = 0; i < 100; i++)
 	{
-		int* temp3 = new int[size + 1];
-		int j = 0;
-		for (int i = 0; i < size + 1; i++)
+		liczby.push_back(rand() % 1001);
+	}
+}
+
+void sortowanie::babelkowe() {
+	for (int i = 0; i < liczby.size(); i++)
+		for (int j = 1; j < liczby.size() - i; j++)
+			if (liczby[j - 1] > liczby[j])
+				swap(liczby[j - 1], liczby[j]);
+}
+
+void sortowanie::sortowanie_wstawianie() {
+
+	vector <int> tablica = liczby;
+	for (int j = 99; j > -1; j--)
+	{
+		o = j + 1;
+		x = tablica[j];
+		while (o < 100 && x > tablica[o])
 		{
-			if (i == index)
-			{
-				temp3[index] = value;
-				continue;
-			}
-			temp3[i] = tablica[j];
-			j++;
+			tablica[o - 1] = tablica[o];
+			o = o + 1;
 		}
-		size++;
-		delete[] tablica;
-		tablica = temp3;
+		tablica[o - 1] = x;
 	}
-	else {
-		return;
-	}
+	liczby = tablica;
 }
 
-
-void MyVector::removeAt(int index) {
-	if (index >= 0 || index < size)
+int sortowanie::szukanie(int value) {
+	for (int i = 0; i < 100; i++)
 	{
-		int* temp4 = new int[size - 1];
-		int j = 0;
-		for (int i = 0; i < size - 1; i++)
+		if (liczby[i] == value)
 		{
-			if (i == index)
-			{
-				j++;
-			}
-			temp4[i] = tablica[j];
-			j++;
+			cout << "element znajduje sie na " << i << " miejscu" << endl;
+			cout << "Funkcja wykonala sie " << i << " razy" << endl;
 		}
-		size--;
-		delete[] tablica;
-		tablica = temp4;
-	}
-	else {
-		return;
-	}
-}
-
-
-void MyVector::printTable() {
-	for (int i = 0; i < size; i++)
-	{
-		cout << tablica[i] << endl;
+		else {
+			cout << "Nie znaleziono elementu" << endl;
+			return -1;
+		}
 	}
 }
